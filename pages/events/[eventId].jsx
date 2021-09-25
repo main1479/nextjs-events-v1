@@ -4,6 +4,7 @@ import EventSummary from '../../components/event-detail/EventSummary';
 import EventLogistics from '../../components/event-detail/EventLogistics';
 import EventContent from '../../components/event-detail/EventContent';
 import { getEventById } from '../../dummy-data';
+import Button from '../../components/ui/Button';
 
 export default function EventDetails() {
 	const router = useRouter();
@@ -16,6 +17,9 @@ export default function EventDetails() {
 					<title>Next Events | Events</title>
 				</Head>
 				<p className="error-message">No event found with that ID!</p>;
+				<div className="center">
+					<Button link="/events">Show All Events</Button>
+				</div>
 			</>
 		);
 

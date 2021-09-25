@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { getFilteredEvents } from '../../dummy-data';
 import EventList from '../../components/events/EventList';
 import ResultsTitle from '../../components/events/ResultTitle';
+import Button from '../../components/ui/Button';
 
 export default function FilteredEvents() {
 	const router = useRouter();
@@ -18,6 +19,9 @@ export default function FilteredEvents() {
 					<title>Next Events | FilteredEvents</title>
 				</Head>
 				<p className="error-message">Invalid filters. Please adjust your values!</p>;
+				<div className="center">
+					<Button link="/events">Show All Events</Button>
+				</div>
 			</>
 		);
 	}
@@ -31,6 +35,9 @@ export default function FilteredEvents() {
 					<title>Next Events | FilteredEvents</title>
 				</Head>
 				<p className="error-message">No events found for the chosen filters!</p>;
+				<div className="center">
+					<Button link="/events">Show All Events</Button>
+				</div>
 			</>
 		);
 	}
