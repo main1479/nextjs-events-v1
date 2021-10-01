@@ -9,10 +9,11 @@
 
 .item span {
 	display: block;
+	font-size: clamp(18px, 4vw, 24px);
 }
 
 .icon {
-	margin-right: 1rem;
+	/* margin-right: 1rem; */
 	color: #71748d;
 }
 

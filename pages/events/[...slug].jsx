@@ -1,18 +1,10 @@
-import { useRouter } from 'next/router';
 import Head from 'next/head';
-import { getFilteredEvents } from '../../dummy-data';
 import EventList from '../../components/events/EventList';
 import ResultsTitle from '../../components/events/ResultTitle';
 import Button from '../../components/ui/Button';
 
-export default function FilteredEvents() {
-	const router = useRouter();
-	const query = router.query.slug;
-	if (!query) return <p className="error-message">Loading...</p>;
-	const year = +query[0];
-	const month = +query[1];
-
-	if (isNaN(year) || isNaN(month) || year < 2021 || year > 2029 || month < 1 || month > 12) {
+export default function FilteredEvents({ filteredEvents, invalidFilters, date }) {
+	if (invalidFilters) {
 		return (
 			<>
 				<Head>
@@ -25,8 +17,6 @@ export default function FilteredEvents() {
 			</>
 		);
 	}
-
-	const filteredEvents = getFilteredEvents({ year, month });
 
 	if (!filteredEvents || filteredEvents.length === 0) {
 		return (
@@ -42,15 +32,42 @@ export default function FilteredEvents() {
 		);
 	}
 
-	const date = new Date(year, month - 1);
-
 	return (
 		<>
 			<Head>
 				<title>Next Events | FilteredEvents</title>
 			</Head>
-			<ResultsTitle date={date} />
+			<ResultsTitle date={new Date(date.year, date.month - 1)} />
 			<EventList items={filteredEvents} />;
 		</>
 	);
 }
+
+export const getServerSideProps = async ({ params }) => {
+	const { slug } = params;
+	const year = +slug[0];
+	const month = +slug[1];
+
+	if (isNaN(year) || isNaN(month) || year < 2021 || year > 2029 || month < 1 || month > 12) {
+		return {
+			props: {
+				invalidFilters: true,
+			},
+		};
+	}
+	const res = await fetch('https://max-s-nextjs-course-default-rtdb.firebaseio.com/events.json');
+	const events = await res.json();
+	const filteredEvents = events.filter((event) => {
+		const eventDate = new Date(event.date);
+		return eventDate.getFullYear() === year && eventDate.getMonth() === month - 1;
+	});
+	return {
+		props: {
+			filteredEvents,
+			date: {
+				year,
+				month,
+			},
+		},
+	};
+};

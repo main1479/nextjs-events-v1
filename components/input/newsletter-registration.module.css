@@ -1,0 +1,48 @@
+.newsletter {
+	margin: 3rem auto;
+	width: 90%;
+	max-width: 20rem;
+}
+
+.newsletter h2 {
+	text-align: center;
+	margin-bottom: 20px;
+	text-transform: uppercase;
+}
+
+.control input {
+	font: inherit;
+	padding: 12px 20px;
+	border-radius: 4px;
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+	border: 1px solid #ccc;
+	outline: none;
+}
+
+.newsletter button {
+	background-color: #2f324d;
+	border: 1px solid #2f324d;
+	padding: 12px 20px;
+	border-radius: 6px;
+	color: #f7f7f7;
+	font-weight: 600;
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+	font: inherit;
+	cursor: pointer;
+}
+
+.newsletter button:hover,
+.newsletter button:active {
+	background-color: #81849e;
+	border-color: #81849e;
+}
+
+.control {
+	display: flex;
+}
+
+.control input {
+	flex: 1;
+}

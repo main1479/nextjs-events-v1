@@ -1,9 +1,9 @@
 import Head from 'next/head';
+import NewsletterRegistration from '../components/input/NewsletterRegistration';
 import EventList from '../components/events/EventList';
-import { getFeaturedEvents } from '../dummy-data';
 
-export default function Home() {
-	const featuredEvents = getFeaturedEvents();
+export default function Home({ featuredEvents }) {
+	if (!featuredEvents) return <p className="error-message">No Featured Event Found</p>;
 	return (
 		<div>
 			<Head>
@@ -13,6 +13,19 @@ export default function Home() {
 			</Head>
 			<h1 className="heading">Featured Events</h1>
 			<EventList items={featuredEvents} />
+			<NewsletterRegistration />
 		</div>
 	);
 }
+
+export const getStaticProps = async () => {
+	const res = await fetch('https://max-s-nextjs-course-default-rtdb.firebaseio.com/events.json');
+	const events = await res.json();
+	const featuredEvents = events.filter((event) => event.isFeatured !== false);
+	return {
+		props: {
+			featuredEvents,
+		},
+		revalidate: 1800,
+	};
+};

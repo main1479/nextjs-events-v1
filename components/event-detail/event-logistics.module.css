@@ -3,9 +3,10 @@
 	border-radius: 6px;
 	background: #2f324d;
 	padding: 2rem;
+	width: 90%;
 	max-width: 50rem;
-	width: 80%;
-	margin: -3rem auto;
+	margin: 0 auto;
+	margin-top: -3rem;
 	color: #d5eeeb;
 	display: flex;
 	justify-content: space-between;
@@ -45,7 +46,8 @@
 @media (min-width: 768px) {
 	.logistics {
 		padding: 2rem;
-		margin: -5rem auto;
+		margin: 0 auto;
+		margin-top: -5rem;
 		gap: 3rem;
 		flex-direction: row;
 		align-items: stretch;

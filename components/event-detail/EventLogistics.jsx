@@ -15,7 +15,7 @@ function EventLogistics({ date, location, image, imageAlt }) {
 	return (
 		<section className={classes.logistics}>
 			<div className={classes.image}>
-				<Image src={'/' + image} alt={imageAlt} layout="fill" />
+				<Image src={'/' + image} alt={imageAlt} width={400} height={300} />
 			</div>
 			<ul className={classes.list}>
 				<LogisticsItem icon={BsCalendar}>

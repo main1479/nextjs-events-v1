@@ -1,11 +1,8 @@
 import Head from 'next/head';
 import EventList from '../../components/events/EventList';
 import EventsSearch from '../../components/events/EventSearch';
-import { getAllEvents } from '../../dummy-data';
 
-export default function index() {
-	const events = getAllEvents();
-
+export default function index({ events }) {
 	if (!events)
 		return (
 			<>
@@ -23,3 +20,14 @@ export default function index() {
 		</>
 	);
 }
+
+export const getStaticProps = async () => {
+	const res = await fetch('https://max-s-nextjs-course-default-rtdb.firebaseio.com/events.json');
+	const events = await res.json();
+	return {
+		props: {
+			events,
+		},
+		revalidate: 1800,
+	};
+};
